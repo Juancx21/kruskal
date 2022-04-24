@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kruskal/controllers/aristcscontroller.dart';
+import 'package:kruskal/controllers/nodescontroller.dart';
 import 'package:kruskal/domain/entities/aristc.dart';
 import 'package:kruskal/domain/entities/node.dart';
 import 'package:kruskal/helpers/drawline.dart';
@@ -21,10 +24,13 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
   late AnimationController animationController;
   late Animation<double> animation;
   late int name;
-  late List<Node> nodes;
+  late List<NodeKruskal> nodes;
   late List<Aristc> aristcs;
   late addAction add;
   late deleteAction delete;
+
+  final nodeController = Get.put(NodesController());
+  final aristController = Get.put(AristcsController());
 
   @override
   void initState() {
@@ -41,14 +47,14 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
         Tween<double>(begin: 368, end: 0.0).animate(animationController);
   }
 
-  void addNode(TapDownDetails details, BuildContext context) {
+  void addNodeKruskal(TapDownDetails details, BuildContext context) {
     if (name <= 122) {
       name = name + 1;
     }
     final RenderBox box = context.findRenderObject() as RenderBox;
     final Offset offset = box.globalToLocal(details.globalPosition);
     setState(() {
-      nodes.add(Node(
+      nodes.add(NodeKruskal(
         name: String.fromCharCode(name).toUpperCase(),
         offset: Offset(offset.dx - 25, offset.dy - 25),
       ));
@@ -56,7 +62,7 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
     debugPrint("${nodes.length}");
   }
 
-  void removeNode(Node e) {
+  void removeNodeKruskal(NodeKruskal e) {
     setState(() {
       nodes.remove(e);
     });
@@ -88,24 +94,24 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
         width: size.width,
         child: Stack(
           children: [
-            AnimatedBuilder(
-              animation: animationController,
-              builder: (context, child) => GestureDetector(
-                onTapDown: (TapDownDetails details) =>
-                    add == addAction.actived ? addNode(details, context) : null,
-                child: Container(
-                  width: size.width - animation.value,
-                  height: size.height,
-                  color: UiColors.cUiBackground(false),
-                  child: Stack(children: [
-                    ...aristcs
+            GestureDetector(
+              onDoubleTap: () {},
+              onTapDown: (TapDownDetails details) =>
+                  add == addAction.actived ? nodeController.add(details) : null,
+              child: Container(
+                width: size.width - animation.value,
+                height: size.height,
+                color: UiColors.cUiBackground(false),
+                child: Obx(
+                  () => Stack(children: [
+                    ...aristController.aristcs
                         .map((e) => CustomPaint(
                               size: Size.infinite,
                               painter: Drawline(aristc: e),
                               child: Text(e.weight.toString()),
                             ))
                         .toList(),
-                    ...nodes
+                    ...nodeController.nodes
                         .map((e) => Transform.translate(
                               offset: e.offset,
                               child: GestureDetector(
@@ -152,11 +158,9 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
               }),
               statusAdd: (val) => setState(() {
                 add = val;
-                print(val);
               }),
               statusDelete: (val) => setState(() {
                 delete = val;
-                print(val);
               }),
             ),
             Positioned(
@@ -172,11 +176,6 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
                     setState(() {
                       showMenuBar = !showMenuBar;
                     });
-                    if (showMenuBar == false) {
-                      animationController.forward();
-                    } else {
-                      animationController.reverse();
-                    }
                   },
                 ))
           ],

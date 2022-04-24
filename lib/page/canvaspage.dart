@@ -22,10 +22,10 @@ class CanvasPage extends StatefulWidget {
 
 class _CanvasPageState extends State<CanvasPage> {
   late int name;
-  late List<Node> nodes;
+  late List<NodeKruskal> nodes;
   late List<Aristc> aristcs;
   late Status status;
-  Node? firstNode;
+  NodeKruskal? firstNode;
 
   @override
   void initState() {
@@ -36,14 +36,14 @@ class _CanvasPageState extends State<CanvasPage> {
     status = Status.nothing;
   }
 
-  void addNode(TapDownDetails details, BuildContext context) {
+  void addNodeKruskal(TapDownDetails details, BuildContext context) {
     if (name <= 122) {
       name = name + 1;
     }
     final RenderBox box = context.findRenderObject() as RenderBox;
     final Offset offset = box.globalToLocal(details.globalPosition);
     setState(() {
-      nodes.add(Node(
+      nodes.add(NodeKruskal(
         name: String.fromCharCode(name).toUpperCase(),
         offset: Offset(offset.dx - 25, offset.dy - 25),
       ));
@@ -76,7 +76,7 @@ class _CanvasPageState extends State<CanvasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTapDown: (TapDownDetails details) => addNode(details, context),
+        onTapDown: (TapDownDetails details) => addNodeKruskal(details, context),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,

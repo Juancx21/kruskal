@@ -34,7 +34,7 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter/static/Inter-Regular.ttf
-        - asset: assets/fonts/Inter/static/Inter-thin.ttf
+        - asset: assets/fonts/Inter/static/Inter-Thin.ttf
           weight: 100
         - asset: assets/fonts/Inter/static/Inter-ExtraLight.ttf
           weight: 200
@@ -53,7 +53,7 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/static/Montserrat-Regular.ttf
-        - asset: assets/fonts/Montserrat/static/Montserrat-thin.ttf
+        - asset: assets/fonts/Montserrat/static/Montserrat-Thin.ttf
           weight: 100
         - asset: assets/fonts/Montserrat/static/Montserrat-ExtraLight.ttf
           weight: 200

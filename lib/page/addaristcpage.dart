@@ -5,7 +5,7 @@ import 'package:kruskal/domain/entities/node.dart';
 import 'package:kruskal/shared/widgets/custom_snackbar.dart';
 
 class AddAristcPage extends StatefulWidget {
-  final List<Node> nodes;
+  final List<NodeKruskal> nodes;
   final List<Aristc>? aristcs;
   const AddAristcPage({Key? key, required this.nodes, this.aristcs})
       : super(key: key);
@@ -16,8 +16,8 @@ class AddAristcPage extends StatefulWidget {
 
 class _AddAristcPageState extends State<AddAristcPage> {
   late int weight;
-  late Node origin;
-  late Node destiny;
+  late NodeKruskal origin;
+  late NodeKruskal destiny;
 
   late TextEditingController controller;
 
@@ -50,8 +50,8 @@ class _AddAristcPageState extends State<AddAristcPage> {
                           .map((e) =>
                               DropdownMenuItem(value: e, child: Text(e.name)))
                           .toList(),
-                      onChanged: (Node? e) => setState(() {
-                        origin = e as Node;
+                      onChanged: (NodeKruskal? e) => setState(() {
+                        origin = e as NodeKruskal;
                       }),
                     ),
                     const SizedBox(
@@ -63,8 +63,8 @@ class _AddAristcPageState extends State<AddAristcPage> {
                           .map((e) =>
                               DropdownMenuItem(value: e, child: Text(e.name)))
                           .toList(),
-                      onChanged: (Node? e) => setState(() {
-                        destiny = e as Node;
+                      onChanged: (NodeKruskal? e) => setState(() {
+                        destiny = e as NodeKruskal;
                       }),
                     ),
                   ],

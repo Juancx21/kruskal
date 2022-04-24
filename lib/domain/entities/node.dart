@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Node {
+class NodeKruskal {
   String name;
   Offset offset;
 
-  Node({required this.name, required this.offset});
+  NodeKruskal({required this.name, required this.offset});
 }
