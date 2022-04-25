@@ -5,42 +5,42 @@ class UiFonts {
         color: color,
         fontSize: 96,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w400,
       );
 
   static TextStyle txtH2(Color color) => TextStyle(
         color: color,
         fontSize: 64,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w400,
       );
 
   static TextStyle txtH3(Color color) => TextStyle(
         color: color,
         fontSize: 48,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
       );
 
   static TextStyle txtH4(Color color) => TextStyle(
         color: color,
         fontSize: 32,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
       );
 
   static TextStyle txtH5(Color color) => TextStyle(
         color: color,
         fontSize: 24,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
       );
 
   static TextStyle txtH6(Color color) => TextStyle(
         color: color,
         fontSize: 20,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w700,
       );
 
   static TextStyle txtSubtitle1(Color color) => TextStyle(
@@ -54,7 +54,7 @@ class UiFonts {
         color: color,
         fontSize: 14,
         fontFamily: 'Montserrat',
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w500,
       );
 
   static TextStyle txtCaption1(Color color) => TextStyle(

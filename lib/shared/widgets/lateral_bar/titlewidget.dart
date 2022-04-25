@@ -26,14 +26,14 @@ class TitleWidget extends StatelessWidget {
       case "title":
         return Text(
           text,
-          style: UiFonts.txtSubtitle1(colorTemp),
+          style: UiFonts.txtH6(colorTemp),
         );
       case "subtitle":
         return Row(
           children: [
             Text(
               text,
-              style: UiFonts.txtSubtitle2(colorTemp),
+              style: UiFonts.txtSubtitle1(colorTemp),
             ),
             const SizedBox(
               width: UiSpacing.microSpaceMedium,

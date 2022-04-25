@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kruskal/controllers/aristcscontroller.dart';
-import 'package:kruskal/controllers/nodescontroller.dart';
-import 'package:kruskal/domain/entities/aristc.dart';
-import 'package:kruskal/domain/entities/node.dart';
+import 'package:kruskal/controllers/kruskalroute.dart';
 import 'package:kruskal/helpers/drawline.dart';
-import 'package:kruskal/shared/utils/others/enums.dart';
 import 'package:kruskal/shared/utils/styles/uicolors.dart';
 import 'package:kruskal/shared/utils/styles/uifonts.dart';
 import 'package:kruskal/shared/widgets/buttons/simple_button.dart';
@@ -24,59 +20,19 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
   late AnimationController animationController;
   late Animation<double> animation;
   late int name;
-  late List<NodeKruskal> nodes;
-  late List<Aristc> aristcs;
-  late addAction add;
-  late deleteAction delete;
 
-  final nodeController = Get.put(NodesController());
-  final aristController = Get.put(AristcsController());
+  final kruskalRoute = Get.put(KruskalRoute());
 
   @override
   void initState() {
     super.initState();
     showMenuBar = true;
     name = 96;
-    nodes = [];
-    aristcs = [];
-    add = addAction.actived;
-    delete = deleteAction.notactivate;
+
     animationController = AnimationController(
         duration: const Duration(milliseconds: 300), vsync: this);
     animation =
         Tween<double>(begin: 368, end: 0.0).animate(animationController);
-  }
-
-  void addNodeKruskal(TapDownDetails details, BuildContext context) {
-    if (name <= 122) {
-      name = name + 1;
-    }
-    final RenderBox box = context.findRenderObject() as RenderBox;
-    final Offset offset = box.globalToLocal(details.globalPosition);
-    setState(() {
-      nodes.add(NodeKruskal(
-        name: String.fromCharCode(name).toUpperCase(),
-        offset: Offset(offset.dx - 25, offset.dy - 25),
-      ));
-    });
-    debugPrint("${nodes.length}");
-  }
-
-  void removeNodeKruskal(NodeKruskal e) {
-    setState(() {
-      nodes.remove(e);
-    });
-    for (var item in aristcs) {
-      if (e == item.origin || e == item.destiny) {
-        removeArch(item);
-      }
-    }
-  }
-
-  void removeArch(Aristc a) {
-    setState(() {
-      aristcs.remove(a);
-    });
   }
 
   @override
@@ -96,30 +52,28 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
           children: [
             GestureDetector(
               onDoubleTap: () {},
-              onTapDown: (TapDownDetails details) =>
-                  add == addAction.actived ? nodeController.add(details) : null,
+              onDoubleTapDown: (TapDownDetails details) =>
+                  kruskalRoute.addNode(details),
               child: Container(
                 width: size.width - animation.value,
                 height: size.height,
                 color: UiColors.cUiBackground(false),
                 child: Obx(
                   () => Stack(children: [
-                    ...aristController.aristcs
+                    ...kruskalRoute.aristcs
                         .map((e) => CustomPaint(
                               size: Size.infinite,
                               painter: Drawline(aristc: e),
                               child: Text(e.weight.toString()),
                             ))
                         .toList(),
-                    ...nodeController.nodes
+                    ...kruskalRoute.nodes
                         .map((e) => Transform.translate(
                               offset: e.offset,
                               child: GestureDetector(
-                                onTap: () => delete == deleteAction.actived
-                                    ? setState(() {
-                                        nodes.remove(e);
-                                      })
-                                    : null,
+                                onTap: () => setState(() {
+                                  // nodes.remove(e);
+                                }),
                                 onPanUpdate: (DragUpdateDetails details) {
                                   setState(() {
                                     e.offset += details.delta;
@@ -151,17 +105,6 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
             ),
             LateralBarWidget(
               showlateralbar: showMenuBar,
-              nodes: nodes,
-              archs: aristcs,
-              arch: (value) => setState(() {
-                aristcs.add(value);
-              }),
-              statusAdd: (val) => setState(() {
-                add = val;
-              }),
-              statusDelete: (val) => setState(() {
-                delete = val;
-              }),
             ),
             Positioned(
                 top: 32,

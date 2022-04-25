@@ -1,9 +1,6 @@
-enum addAction {
-  notactivate,
-  actived,
-}
-
-enum deleteAction {
-  notactivate,
-  actived,
+enum Status {
+  notStatus,
+  loading,
+  finished,
+  error,
 }
