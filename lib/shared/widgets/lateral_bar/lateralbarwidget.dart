@@ -193,7 +193,6 @@ class _LateralBarWidgetState extends State<LateralBarWidget>
                             if (key.currentState!.validate()) {
                               kruskalRoute.addAristc(
                                   origin, destiny, controller.text);
-                              debugPrint("dss");
                             }
                           },
                         ),

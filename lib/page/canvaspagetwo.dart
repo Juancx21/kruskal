@@ -60,13 +60,14 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
                 color: UiColors.cUiBackground(false),
                 child: Obx(
                   () => Stack(children: [
-                    ...kruskalRoute.aristcs
-                        .map((e) => CustomPaint(
-                              size: Size.infinite,
-                              painter: Drawline(aristc: e),
-                              child: Text(e.weight.toString()),
-                            ))
-                        .toList(),
+                    ...kruskalRoute.aristcs.map((e) {
+                      return CustomPaint(
+                        size: Size.infinite,
+                        painter: Drawline(
+                          aristc: e,
+                        ),
+                      );
+                    }).toList(),
                     ...kruskalRoute.nodes
                         .map((e) => Transform.translate(
                               offset: e.offset,
