@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kruskal/domain/entities/aristc.dart';
+import 'package:kruskal/shared/utils/styles/uicolors.dart';
+import 'package:kruskal/shared/utils/styles/uifonts.dart';
 
 class Drawline extends CustomPainter {
   final Aristc aristc;
@@ -18,15 +20,12 @@ class Drawline extends CustomPainter {
         Offset(destinyx, destinyy),
         Paint()
           ..strokeWidth = 2
-          ..color = Colors.redAccent);
+          ..color = UiColors.core3);
 
     final textPainter = TextPainter(
         text: TextSpan(
           text: aristc.weight.toString(),
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 30,
-          ),
+          style: UiFonts.txtSubtitle2(UiColors.black),
         ),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center);

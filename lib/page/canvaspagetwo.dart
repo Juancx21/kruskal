@@ -16,10 +16,8 @@ class CanvasPageTwo extends StatefulWidget {
 
 class _CanvasPageTwoState extends State<CanvasPageTwo>
     with SingleTickerProviderStateMixin {
-  late bool showMenuBar;
-  late AnimationController animationController;
-  late Animation<double> animation;
   late int name;
+  late bool showMenuBar;
 
   final kruskalRoute = Get.put(KruskalRoute());
 
@@ -28,22 +26,17 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
     super.initState();
     showMenuBar = true;
     name = 96;
-
-    animationController = AnimationController(
-        duration: const Duration(milliseconds: 300), vsync: this);
-    animation =
-        Tween<double>(begin: 368, end: 0.0).animate(animationController);
   }
 
   @override
   void dispose() {
     super.dispose();
-    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: UiColors.cUiBackground(false),
       body: SizedBox(
@@ -55,7 +48,7 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
               onDoubleTapDown: (TapDownDetails details) =>
                   kruskalRoute.addNode(details),
               child: Container(
-                width: size.width - animation.value,
+                width: size.width,
                 height: size.height,
                 color: UiColors.cUiBackground(false),
                 child: Obx(
@@ -86,13 +79,13 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
                                       height: 50,
                                       width: 50,
                                       decoration: BoxDecoration(
-                                          color: Colors.blue,
+                                          color: UiColors.core6,
                                           borderRadius:
                                               BorderRadius.circular(25)),
                                       child: Center(
                                         child: Text(
                                           e.name,
-                                          style: UiFonts.txtCaption1(
+                                          style: UiFonts.txtSubtitle1(
                                               UiColors.white),
                                         ),
                                       )),
