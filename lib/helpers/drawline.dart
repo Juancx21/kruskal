@@ -5,7 +5,6 @@ import 'package:kruskal/shared/utils/styles/uifonts.dart';
 
 class Drawline extends CustomPainter {
   final Aristc aristc;
-
   Drawline({required this.aristc});
 
   @override
@@ -20,7 +19,7 @@ class Drawline extends CustomPainter {
         Offset(destinyx, destinyy),
         Paint()
           ..strokeWidth = 2
-          ..color = UiColors.core3);
+          ..color = aristc.active ? UiColors.darksuccess : UiColors.core3 );
 
     final textPainter = TextPainter(
         text: TextSpan(

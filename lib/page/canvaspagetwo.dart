@@ -67,6 +67,9 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
                               child: GestureDetector(
                                 onTap: () => setState(() {
                                   // nodes.remove(e);
+                                  if (kruskalRoute.boolDelete.value) {
+                                    debugPrint("SE PUEDE ELIMINAR");
+                                  }
                                 }),
                                 onPanUpdate: (DragUpdateDetails details) {
                                   setState(() {
@@ -79,7 +82,7 @@ class _CanvasPageTwoState extends State<CanvasPageTwo>
                                       height: 50,
                                       width: 50,
                                       decoration: BoxDecoration(
-                                          color: UiColors.core6,
+                                          color: kruskalRoute.nodeColor.value,
                                           borderRadius:
                                               BorderRadius.circular(25)),
                                       child: Center(

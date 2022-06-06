@@ -8,6 +8,7 @@ import 'package:kruskal/shared/utils/others/globalvariables.dart';
 import 'package:kruskal/shared/utils/styles/uicolors.dart';
 import 'package:kruskal/shared/utils/styles/uifonts.dart';
 import 'package:kruskal/shared/utils/styles/uispacing.dart';
+import 'package:kruskal/shared/widgets/buttons/color_button.dart';
 import 'package:kruskal/shared/widgets/buttons/simple_button.dart';
 import 'package:kruskal/shared/widgets/buttons/swtich_button.dart';
 import 'package:kruskal/shared/widgets/lateral_bar/customdropdown.dart';
@@ -199,26 +200,6 @@ class _LateralBarWidgetState extends State<LateralBarWidget>
                       ),
                       const TitleWidget(
                         type: "subtitle",
-                        text: "Node",
-                      ),
-                      Container(
-                        margin: UiSpacing.bottomMacrosmall(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Add",
-                              style: UiFonts.txtSubtitle2(
-                                  UiColors.outline2Color(false)),
-                            ),
-                            const SwitchButton(
-                              height: 16,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const TitleWidget(
-                        type: "subtitle",
                         text: "General",
                       ),
                       Container(
@@ -231,8 +212,140 @@ class _LateralBarWidgetState extends State<LateralBarWidget>
                               style: UiFonts.txtSubtitle2(
                                   UiColors.outline2Color(false)),
                             ),
-                            const SwitchButton(
+                            SwitchButton(
+                              state: (value) =>
+                                  kruskalRoute.boolDelete.value = value,
                               height: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: UiSpacing.bottomMacrosmall(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Font size",
+                              style: UiFonts.txtSubtitle2(
+                                  UiColors.outline2Color(false)),
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => debugPrint("hola"),
+                                  child: Container(
+                                    height: 24,
+                                    width: 24,
+                                    margin: UiSpacing.leftMicromedium(),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: UiColors.container2Color(false),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      "+",
+                                      style: TextStyle(
+                                        height: 1,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                    margin: UiSpacing.leftMicromedium(),
+                                    child: Text("1")),
+                                GestureDetector(
+                                  onTap: () => debugPrint("hola"),
+                                  child: Container(
+                                    height: 24,
+                                    width: 24,
+                                    margin: UiSpacing.leftMicromedium(),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: UiColors.container2Color(false),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      "-",
+                                      style: TextStyle(
+                                        height: 1,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: UiSpacing.bottomMacrosmall(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Node color",
+                              style: UiFonts.txtSubtitle2(
+                                  UiColors.outline2Color(false)),
+                            ),
+                            Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    ColorButton(
+                                        function: (value) => kruskalRoute
+                                            .nodeColor.value = value,
+                                        color: "red"),
+                                    ColorButton(
+                                        function: (value) => kruskalRoute
+                                            .nodeColor.value = value,
+                                        color: "green"),
+                                    ColorButton(
+                                        function: (value) => kruskalRoute
+                                            .nodeColor.value = value,
+                                        color: "purple"),
+                                    ColorButton(
+                                        function: (value) => kruskalRoute
+                                            .nodeColor.value = value,
+                                        color: "blue"),
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: UiSpacing.bottomMacrosmall(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Aristc color",
+                              style: UiFonts.txtSubtitle2(
+                                  UiColors.outline2Color(false)),
+                            ),
+                            Row(
+                              children: [
+                                ColorButton(
+                                    function: (value) =>
+                                        kruskalRoute.nodeColor.value = value,
+                                    color: "red"),
+                                ColorButton(
+                                    function: (value) =>
+                                        kruskalRoute.nodeColor.value = value,
+                                    color: "green"),
+                                ColorButton(
+                                    function: (value) =>
+                                        kruskalRoute.nodeColor.value = value,
+                                    color: "purple"),
+                                ColorButton(
+                                    function: (value) =>
+                                        kruskalRoute.nodeColor.value = value,
+                                    color: "blue"),
+                              ],
                             ),
                           ],
                         ),
@@ -244,9 +357,7 @@ class _LateralBarWidgetState extends State<LateralBarWidget>
                           icon: "rocket-lunch",
                           ontap: () {
                             if (key.currentState!.validate()) {
-                              kruskalRoute.addAristc(
-                                  origin, destiny, controller.text);
-                              debugPrint("dss");
+                              kruskalRoute.kruskalAlgorithm();
                             }
                           },
                         ),
